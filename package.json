@@ -1,11 +1,8 @@
 {
   "name": "beecam",
   "main": "main.js",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
-  "homepage": ".",
-  "chromium-args": "--mixed-context",
-  "node-remote": "http://localhost:3000",
   "window": {
     "width": 250,
     "height": 250,
@@ -16,15 +13,17 @@
     "frame": false
   },
   "dependencies": {
+    "dotenv": "^16.0.2",
+    "gulp": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "scripts": {
-    "start": "parcel index.html -p 3000",
-    "build": "react-scripts build",
+    "start": "parcel app/index.html -p 3000",
+    "dist": "build --tasks win-x86,win-x64,linux-x86,linux-x64,mac-x64 --mirror https://dl.nwjs.io/ .",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "nwjs-dev": "concurrently \"set BROWSER=none&&yarn start\" \"wait-on http://localhost:3000 &&set NWJS_START_URL=http://localhost:3000&& sudo nw .\" "
+    "nwjs": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && sudo nw .\" "
   },
   "eslintConfig": {
     "extends": [
@@ -49,10 +48,21 @@
     "@parcel/transformer-stylus": "2.7.0",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "@types/styled-components": "^5.1.26",
     "concurrently": "^7.4.0",
+    "nwjs-builder-phoenix": "^1.15.0",
     "parcel": "^2.7.0",
     "process": "^0.11.10",
     "styled-components": "^5.3.6",
     "wait-on": "^6.0.1"
+  },
+  "build": {
+    "nwVersion": "0.14.7"
+  },
+  "source": "app/index.html",
+  "targets": {
+    "main": {
+      "distDir": "./www"
+    }
   }
 }
