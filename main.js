@@ -14,7 +14,9 @@ const main_window_options = {
   resizable: false,
   position: "center",
   always_on_top: true,
-  frame: false
+  frame: false,
+  visible_on_all_workspaces: true,
+  show_in_taskbar: false
 }
 
 const main_window = nw.Window.open(startUrl, main_window_options, function(win) {
