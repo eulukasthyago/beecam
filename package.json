@@ -1,0 +1,58 @@
+{
+  "name": "beecam",
+  "main": "main.js",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": ".",
+  "chromium-args": "--mixed-context",
+  "node-remote": "http://localhost:3000",
+  "window": {
+    "width": 250,
+    "height": 250,
+    "transparent": false,
+    "resizable": true,
+    "position": "center",
+    "always_on_top": true,
+    "frame": false
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "scripts": {
+    "start": "parcel index.html -p 3000",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "nwjs-dev": "concurrently \"set BROWSER=none&&yarn start\" \"wait-on http://localhost:3000 &&set NWJS_START_URL=http://localhost:3000&& sudo nw .\" "
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.7.0",
+    "@parcel/transformer-stylus": "2.7.0",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "concurrently": "^7.4.0",
+    "parcel": "^2.7.0",
+    "process": "^0.11.10",
+    "styled-components": "^5.3.6",
+    "wait-on": "^6.0.1"
+  }
+}
