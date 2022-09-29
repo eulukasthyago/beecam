@@ -1,0 +1,12 @@
+{
+  "files": ["./main.ts"],
+  "compilerOptions": {
+    "target": "es6",
+    "module": "umd",
+    "outDir": "lib",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "typeRoots": [ "node_modules/", "node_modules/@types" ]
+  },
+  "exclude": [ "node_modules" ]
+}

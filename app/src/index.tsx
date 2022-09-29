@@ -10,9 +10,9 @@ export default function (){
     useEffect(() => {
         (async () => {
             if(navigator.mediaDevices){
-                const mediaStream = await navigator.mediaDevices.getUserMedia({video: true});
-                videoRef.current.srcObject = mediaStream;
-                videoRef.current?.play();
+                // const mediaStream = await navigator.mediaDevices.getUserMedia({video: true});
+                // videoRef.current.srcObject = mediaStream;
+                // videoRef.current?.play();
                 if(!videoRef.current.paused){
                     setShowVideo(true);
                 }else{
@@ -27,7 +27,7 @@ export default function (){
             <GlobalStyles />
             <ElementDraggable>
                 <LoadingMessage />
-                <WebCam id='video' ref={videoRef} show={false}/>
+                <WebCam id='video' ref={videoRef} show={showVideo}/>
             </ElementDraggable>
         </>
     );
