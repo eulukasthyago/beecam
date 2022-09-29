@@ -10,11 +10,11 @@ const handle_reload_app = () => {
 const main_window_options = {
   width: 250,
   height: 250,
-  transparent: false,
-  resizable: false,
+  transparent: true,
+  resizable: true,
   position: "center",
   always_on_top: true,
-  frame: false,
+  frame: true,
   visible_on_all_workspaces: true,
   show_in_taskbar: false
 }

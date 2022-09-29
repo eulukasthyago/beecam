@@ -19,7 +19,7 @@
     "react-dom": "^18.2.0"
   },
   "scripts": {
-    "start": "parcel app/index.html -p 3000",
+    "start": "parcel app/public/index.html -p 3000",
     "dist": "build --tasks win-x86,win-x64,linux-x86,linux-x64,mac-x64 --mirror https://dl.nwjs.io/ .",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -59,7 +59,7 @@
   "build": {
     "nwVersion": "0.14.7"
   },
-  "source": "app/index.html",
+  "source": "app/public/index.html",
   "targets": {
     "main": {
       "distDir": "./www"

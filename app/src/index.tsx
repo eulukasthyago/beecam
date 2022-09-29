@@ -27,7 +27,7 @@ export default function (){
             <GlobalStyles />
             <ElementDraggable>
                 <LoadingMessage />
-                <WebCam id='video' ref={videoRef} show={showVideo}/>
+                <WebCam id='video' ref={videoRef} show={false}/>
             </ElementDraggable>
         </>
     );
