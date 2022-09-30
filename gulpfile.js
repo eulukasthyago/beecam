@@ -21,6 +21,20 @@ function compSass(){
 }
 exports.compSass = compSass;
 
+function compComponents(){
+  return gulp.src('./components/**/*.ts')
+  .pipe(conct('components.ts'))
+  .pipe(gulp.dest('./components/'))
+  .pipe(ts({
+    "target": "es6",
+    "module": "umd",
+    "outDir": "lib",
+    "noImplicitAny": true,
+    "moduleResolution": "node"
+  }))
+  .pipe(gulp.dest('./js'));
+}
+
 function compTypescript(){
   return gulp.src([
     './main.ts',
@@ -53,8 +67,11 @@ exports.browser = browser;
 function watch(){
   gulp.watch('./css/sass/**/*.scss', compSass);
   gulp.watch('./main.ts', compTypescript);
-  gulp.watch('./views/**/*.html', browserSync.reload());
+  gulp.watch(['./components/**/*.ts', '!./components/components.ts'], compComponents);
+  gulp.watch('./views/**/*.html').on('change', function(){
+    browserSync.reload()
+  });
 }
 exports.watch = watch;
 
-exports.default = parallel(compSass, compTypescript, watch, browser);
+exports.default = parallel(compSass, compTypescript, compComponents, watch, browser);

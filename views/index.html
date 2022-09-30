@@ -8,6 +8,15 @@
   <title>Document</title>
 </head>
 <body>
-  <video id='video'></video>
+  <div id="container">
+    <video id='video'></video>
+  </div>
+  <script type="text/javascript">
+    console.log("Oiie");
+    const my_window = nw.Window.getAll(function(blas) {
+      console.log("Blas", blas);
+    });
+    console.log("batata", my_window);
+  </script>
 </body>
 </html>

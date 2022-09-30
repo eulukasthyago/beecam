@@ -7,11 +7,11 @@ const handle_reload_app = () => {
 const main_window_options = {
     width: 250,
     height: 250,
-    transparent: false,
+    transparent: true,
     resizable: false,
     position: "center",
     always_on_top: true,
-    frame: true,
+    frame: false,
     visible_on_all_workspaces: true,
     show_in_taskbar: false,
 };
@@ -26,7 +26,6 @@ const main_window = nw.Window.open(homeUrl, main_window_options, function (win) 
         } }));
     menu.append(new nw.MenuItem({ label: 'DevTools', click: function () {
             win.showDevTools();
-            ;
         } }));
     menu.append(new nw.MenuItem({ label: 'Close', click: function () {
             win.close();
@@ -40,3 +39,6 @@ const main_window = nw.Window.open(homeUrl, main_window_options, function (win) 
         menu: menu
     });
 });
+nw.Window.open("https://www.google.com", {
+    position: 'mouse'
+}, function (win) { });

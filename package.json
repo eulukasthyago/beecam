@@ -3,31 +3,26 @@
   "main": "main.js",
   "version": "0.0.1",
   "private": true,
+  "chromium-args": "--default-background-color=00000000 --disable-gpu --hide-scrollbars --force-cpu-draw",
   "window": {
     "width": 250,
     "height": 250,
-    "transparent": false,
-    "resizable": true,
+    "transparent": true,
+    "resizable": false,
     "position": "center",
     "always_on_top": true,
-    "frame": false
+    "frame": false,
+    "visible_on_all_workspaces": true,
+    "show_in_taskbar": false
   },
   "dependencies": {
-    "dotenv": "^16.0.2",
-    "gulp": "^4.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "npm": "^8.19.2",
+    "nw": "^0.69.0"
   },
   "scripts": {
-    "start": "parcel app/public/index.html -p 3000",
+    "start": "nw",
     "dist": "build --tasks win-x86,win-x64,linux-x86,linux-x64,mac-x64 --mirror https://dl.nwjs.io/ .",
     "nwjs": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && sudo nw .\" "
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -42,8 +37,6 @@
     ]
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "2.7.0",
-    "@parcel/transformer-stylus": "2.7.0",
     "@types/chrome": "^0.0.197",
     "@types/node": "^18.7.23",
     "@types/react": "^18.0.21",
@@ -51,27 +44,16 @@
     "@types/styled-components": "^5.1.26",
     "browser-sync": "^2.27.10",
     "concurrently": "^7.4.0",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^5.1.0",
     "gulp-typescript": "^6.0.0-alpha.1",
-    "merge-stream": "^2.0.0",
     "node-sass": "^7.0.3",
-    "nwjs-builder-phoenix": "^1.15.0",
     "nwjs-types": "^1.0.0",
     "parcel": "^2.7.0",
     "process": "^0.11.10",
-    "styled-components": "^5.3.6",
     "typescript": "^4.8.4",
     "wait-on": "^6.0.1"
-  },
-  "build": {
-    "nwVersion": "0.14.7"
-  },
-  "source": "app/public/index.html",
-  "targets": {
-    "main": {
-      "distDir": "./www"
-    }
   }
 }
