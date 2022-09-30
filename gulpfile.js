@@ -1,37 +1,61 @@
-const gulp = require('gulp');
+const { series, parallel, ...gulp } = require('gulp');
 const ts = require('gulp-typescript');
 const sass = require('gulp-sass')(require('node-sass'));
 const conct = require('gulp-concat');
 const tsProject = ts.createProject("tsconfig.json");
-const merge = require('merge-stream');
+const browserSync = require('browser-sync').create();
+const autoprefixer = require('gulp-autoprefixer');
 
-function compsass(){
+function compSass(){
   return gulp.src('./css/sass/**/*.scss')
-  .pipe(conct('styles.scss'))
+  .pipe(conct('style.scss'))
   .pipe(gulp.dest('./css'))
-  .pipe(sass({ outputStyle: 'compressed' }))
-  .pipe(gulp.dest('./css'));
+  .pipe(sass({ 
+    outputStyle: 'compressed'
+  }))
+  .pipe(autoprefixer({
+    browsers: ['last 2 versions'],
+    cascade: false
+  }))
+  .pipe(gulp.dest('./views'))
+  .pipe(browserSync.stream());;
 }
-function typescript(){
-  return gulp.src(['./main.ts', 'node_modules/@types/*.d.ts', 'node_modules/nwjs-types/*.d.ts'])
-  .pipe(tsProject()).js
-  .pipe(gulp.dest('./'));
+exports.compSass = compSass;
 
-  //  merge([
-  //   tsResult.dts.pipe(gulp.dest('./js/types')),
-  //   tsResult.js.pipe(gulp.dest('./'))
-  // ]);
-  // return gulp.src('./js/ts/**/*.ts')
-  // .pipe(conct('main.ts'))
-  // .pipe(gulp.dest('./js'))
-  // .pipe(tsProject.src())
-  // .pipe(gulp.dest('./'));
+function compTypescript(){
+  return gulp.src([
+    './main.ts',
+    'node_modules/@types/*.d.ts',
+    'node_modules/nwjs-types/*.d.ts',
+    '!node_modules/**/node_modules/**/*.d.ts'
+  ])
+  .pipe(ts({
+    "target": "es6",
+    "module": "umd",
+    "outDir": "lib",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+  })).js
+  .pipe(gulp.dest('./'));
+  // .pipe(browserSync.stream());
 }
+exports.compTypescript = compTypescript;
+
+function browser() {
+  browserSync.init({
+    open: false,
+    server: {
+      baseDir: './views/'
+    }
+  });
+}
+exports.browser = browser;
 
 function watch(){
-  gulp.watch('./css/sass/**/*.scss', compsass);
-  gulp.watch('./main.ts', typescript);
+  gulp.watch('./css/sass/**/*.scss', compSass);
+  gulp.watch('./main.ts', compTypescript);
+  gulp.watch('./views/**/*.html', browserSync.reload());
 }
-
-exports.compsass = compsass;
 exports.watch = watch;
+
+exports.default = parallel(compSass, compTypescript, watch, browser);

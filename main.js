@@ -1,5 +1,7 @@
 const is_dev = true;
-const fileload = "./views/main.html";
+const prodUrl = "./views/index.html";
+const devUrl = "http://localhost:3000";
+const homeUrl = is_dev ? devUrl : devUrl;
 const handle_reload_app = () => {
 };
 const main_window_options = {
@@ -13,7 +15,7 @@ const main_window_options = {
     visible_on_all_workspaces: true,
     show_in_taskbar: false,
 };
-const main_window = nw.Window.open(fileload, main_window_options, function (win) {
+const main_window = nw.Window.open(homeUrl, main_window_options, function (win) {
     win.setShadow(false);
     let tray;
     const menu = new nw.Menu();
